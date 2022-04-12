@@ -14,8 +14,12 @@ export default function Model({ action }) {
 
   useEffect(() => {
     console.log("actions", actions);
-
-    actions.RunForward.play();
+    if (previousAction) {
+      actions[previousAction].fadeOut(0.2);
+      actions[previousAction].stop();
+    }
+    actions[action].play();
+    actions[action].fadeIn(0.2);
   }, [action, actions, previousAction]);
 
   return (
