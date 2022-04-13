@@ -1,22 +1,72 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import Archer from "./models/Archer";
-import styled from "styled-components";
 
-const NameTag = styled.div`
-  padding-top: 10px;
-  transform: translate3d(-20%, -400%, 0);
-  text-align: left;
-  background: #202035;
-  color: white;
-  padding: 5px 5px;
-  border-radius: 5px;
-  font-size: 1rem;
-`;
 function Player(props) {
+  const playerMove = useRef(null);
+  const [action, setAction] = useState("DwrafIdel");
+
+  document.onkeydown = (e) => {
+    switch (e.keyCode) {
+      case 37:
+        playerMove.current.position.x = playerMove.current.position.x -= 0.4;
+        playerMove.current.rotation.y = playerMove.current.rotation.y =
+          -Math.PI / 2;
+        setAction("Run");
+        break;
+      case 39:
+        playerMove.current.position.x = playerMove.current.position.x += 0.4;
+        playerMove.current.rotation.y = playerMove.current.rotation.y =
+          Math.PI / 2;
+        setAction("Run");
+        break;
+      case 38:
+        playerMove.current.position.z = playerMove.current.position.z -= 0.4;
+        playerMove.current.rotation.y = playerMove.current.rotation.y =
+          -Math.PI;
+        setAction("Run");
+        break;
+      case 40:
+        playerMove.current.position.z = playerMove.current.position.z += 0.4;
+        playerMove.current.rotation.y = playerMove.current.rotation.y =
+          Math.PI / 100;
+        setAction("Run");
+        break;
+      default:
+    }
+  };
+  document.onkeyup = (e) => {
+    switch (e.keyCode) {
+      case 37:
+        setAction("DwrafIdel");
+        break;
+      case 39:
+        setAction("DwrafIdel");
+        break;
+      case 38:
+        setAction("DwrafIdel");
+        break;
+      case 40:
+        setAction("DwrafIdel");
+        break;
+      default:
+    }
+  };
+
+  const playerInfo = {
+    id: "1",
+    name: "Archer",
+    position: { x: 0, y: 0, z: 0 },
+    rotation: { x: 0, y: 0, z: 0 },
+    scale: { x: 1, y: 1, z: 1 },
+    action: "idle",
+    previousAction: "idle",
+    isMoving: false,
+  };
+
   return (
-    <group>
+    <group ref={playerMove}>
       <mesh>
-        <Archer />
+        <Archer action={action} />
       </mesh>
       <axesHelper args={[1]} />
     </group>
