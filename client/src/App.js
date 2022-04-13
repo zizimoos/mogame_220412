@@ -59,6 +59,10 @@ a {
 * {
   box-sizing: border-box;
 }
+#root {
+	overflow: hidden;
+	width: 100%;
+}
 `;
 
 function App() {

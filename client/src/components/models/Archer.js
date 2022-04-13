@@ -9,7 +9,7 @@ import styled from "styled-components";
 
 const NameTag = styled.div`
   padding-top: 10px;
-  transform: translate3d(-70%, -600%, 0);
+  transform: translate3d(-70%, -800%, 0);
   text-align: left;
   background: #202035;
   color: white;
@@ -26,7 +26,7 @@ export default function Model({ action }) {
   const previousAction = usePrevious(action);
 
   useEffect(() => {
-    console.log("actions", actions);
+    // console.log("actions", actions);
     if (previousAction) {
       actions[previousAction].fadeOut(0.2);
       actions[previousAction].stop();

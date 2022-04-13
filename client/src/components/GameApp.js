@@ -1,10 +1,9 @@
 import React from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import { RecoilRoot } from "recoil";
 
-import PlayGround from "./PlayGround";
 import styled from "styled-components";
-import Player from "./Player";
+import MainScene from "./MainScene";
 
 const CanvasContainer = styled.div`
   width: 800px;
@@ -14,24 +13,13 @@ const CanvasContainer = styled.div`
 
 function GameApp(props) {
   return (
-    <>
-      <CanvasContainer>
-        <Canvas>
-          <ambientLight />
-          <directionalLight
-            position={[0, 20, 10]}
-            color="white"
-            intensity={0.5}
-          />
-          <pointLight position={[-1, 1, 3]} color="red" intensity={2} />
-          <pointLight position={[1, 1, 3]} color="blue" intensity={2} />
-          <pointLight position={[0, 3, -10]} color="white" intensity={2} />
-          <Player />
-          <PlayGround />
-          <OrbitControls />
-        </Canvas>
-      </CanvasContainer>
-    </>
+    <CanvasContainer>
+      <Canvas>
+        <RecoilRoot>
+          <MainScene />
+        </RecoilRoot>
+      </Canvas>
+    </CanvasContainer>
   );
 }
 
