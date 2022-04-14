@@ -1,9 +1,18 @@
 import React, { useRef, useState } from "react";
+import { useRecoilState } from "recoil";
 import Archer from "./models/Archer";
+import { playerPosition } from "./atoms";
+import { useFrame } from "@react-three/fiber";
 
 function Player(props) {
   const playerMove = useRef(null);
   const [action, setAction] = useState("DwrafIdel");
+
+  const [position, setPosition] = useRecoilState(playerPosition);
+
+  useFrame(() => {
+    console.log("characterPosition", position);
+  });
 
   document.onkeydown = (e) => {
     switch (e.keyCode) {
@@ -12,23 +21,43 @@ function Player(props) {
         playerMove.current.rotation.y = playerMove.current.rotation.y =
           -Math.PI / 2;
         setAction("Run");
+        setPosition({
+          x: playerMove.current.position.x,
+          y: playerMove.current.position.y,
+          z: playerMove.current.position.z,
+        });
         break;
       case 39:
         playerMove.current.position.x = playerMove.current.position.x += 0.6;
         playerMove.current.rotation.y = playerMove.current.rotation.y =
           Math.PI / 2;
         setAction("Run");
+        setPosition({
+          x: playerMove.current.position.x,
+          y: playerMove.current.position.y,
+          z: playerMove.current.position.z,
+        });
         break;
       case 38:
         playerMove.current.position.z = playerMove.current.position.z -= 0.6;
         playerMove.current.rotation.y = playerMove.current.rotation.y =
           -Math.PI;
         setAction("Run");
+        setPosition({
+          x: playerMove.current.position.x,
+          y: playerMove.current.position.y,
+          z: playerMove.current.position.z,
+        });
         break;
       case 40:
         playerMove.current.position.z = playerMove.current.position.z += 0.6;
         playerMove.current.rotation.y = playerMove.current.rotation.y = 0;
         setAction("Run");
+        setPosition({
+          x: playerMove.current.position.x,
+          y: playerMove.current.position.y,
+          z: playerMove.current.position.z,
+        });
         break;
       default:
     }

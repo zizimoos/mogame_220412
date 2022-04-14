@@ -6,9 +6,9 @@ import styled from "styled-components";
 import MainScene from "./MainScene";
 
 const CanvasContainer = styled.div`
-  width: 800px;
+  width: 100vw;
   height: 800px;
-  background-color: black;
+  background-color: teal;
 `;
 
 function GameApp(props) {
