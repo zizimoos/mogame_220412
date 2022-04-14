@@ -52,6 +52,7 @@ table {
 }
 body {
   font-family: 'Montserrat', sans-serif;
+  background-color: unset;
 }
 a {
   text-decoration: none;

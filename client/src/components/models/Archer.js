@@ -9,7 +9,7 @@ import styled from "styled-components";
 
 const NameTag = styled.div`
   padding-top: 10px;
-  transform: translate3d(-70%, -800%, 0);
+  transform: translate3d(-70%, -600%, 0);
   text-align: left;
   background: #202035;
   color: white;
@@ -46,6 +46,7 @@ export default function Model({ action }) {
             skeleton={nodes.Erika_Archer_Body_Mesh.skeleton}
           />
           <skinnedMesh
+            castShadow
             geometry={nodes.Erika_Archer_Clothes_Mesh.geometry}
             material={materials.Akai_MAT}
             skeleton={nodes.Erika_Archer_Clothes_Mesh.skeleton}

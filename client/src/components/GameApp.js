@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { RecoilRoot } from "recoil";
 
@@ -14,9 +14,11 @@ const CanvasContainer = styled.div`
 function GameApp(props) {
   return (
     <CanvasContainer>
-      <Canvas>
+      <Canvas shadows>
         <RecoilRoot>
-          <MainScene />
+          <Suspense fallback={null}>
+            <MainScene />
+          </Suspense>
         </RecoilRoot>
       </Canvas>
     </CanvasContainer>
