@@ -3,6 +3,19 @@ import { useRecoilState } from "recoil";
 import Archer from "./models/Archer";
 import { playerPosition } from "./atoms";
 import { useFrame } from "@react-three/fiber";
+import { Html } from "@react-three/drei";
+import styled from "styled-components";
+
+const NameTag = styled.div`
+  padding-top: 10px;
+  transform: translate3d(-70%, -600%, 0);
+  text-align: left;
+  background: #202035;
+  color: white;
+  padding: 5px 5px;
+  border-radius: 5px;
+  font-size: 1rem;
+`;
 
 function Player(props) {
   const playerMove = useRef(null);
@@ -97,6 +110,9 @@ function Player(props) {
       <mesh>
         <Archer action={action} />
       </mesh>
+      {/* <Html distanceFactor={10}>
+        <NameTag> {`Archer`} </NameTag>
+      </Html> */}
       <axesHelper args={[2]} />
     </group>
   );

@@ -7,6 +7,7 @@
     "@react-three/fiber": "^8.0.10",
     "camera-controls": "^1.34.2",
     "cra-template": "1.1.3",
+    "gsap": "^3.10.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",

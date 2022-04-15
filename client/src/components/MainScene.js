@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 // import { useFrame } from "@react-three/fiber";
+import { gsap } from "gsap";
+
 import {
   Environment,
   OrbitControls,
@@ -17,18 +19,21 @@ import { playerPosition } from "./atoms.js";
 function MainScene(props) {
   const orbitControlsRef = useRef(null);
   const defaultCamera = useRef(null);
+  const ballRef = useRef(null);
+  const DlightRef = useRef(null);
 
   const position = useRecoilValue(playerPosition);
 
   useFrame((state) => {
-    // console.log(state);
-    // console.log(defaultCamera.current.position);
-    // console.log(orbitControlsRef.current.target);
-    console.log("characterPosition", position);
+    // console.log("characterPosition", position);
     defaultCamera.current.position.x = position.x;
-    defaultCamera.current.position.y = position.y;
+    defaultCamera.current.position.y = position.y + 15;
     defaultCamera.current.position.z = position.z;
     orbitControlsRef.current.target.set(position.x, position.y, position.z);
+
+    DlightRef.current.position.x = position.x;
+    DlightRef.current.position.y = position.y + 15;
+    DlightRef.current.position.z = position.z;
     orbitControlsRef.current.update();
   });
 
@@ -37,6 +42,24 @@ function MainScene(props) {
       console.log(orbitControlsRef.current);
     }
   }, []);
+
+  useEffect(() => {
+    if (!!ballRef.current) {
+      console.log(ballRef.current);
+      gsap.fromTo(
+        ballRef.current.position,
+        { x: 0, y: 0, z: 0 },
+        {
+          x: 0,
+          y: 8,
+          z: 0,
+          duration: 3,
+          ease: "power1.inOut",
+          repeat: -1,
+        }
+      );
+    }
+  }, [ballRef.current?.position]);
 
   return (
     <>
@@ -56,23 +79,32 @@ function MainScene(props) {
 
       <ambientLight args={["#ffffff", 0.8]} />
       <directionalLight
-        position={[-100, 200, -100]}
+        ref={DlightRef}
+        position={[-100, 200, -200]}
+        scale={[500, 500, 500]}
         color="white"
-        intensity={0.5}
+        intensity={2}
+        distance={100}
         castShadow
       />
       <spotLight
-        position={[-5, 1, 0]}
-        args={["#ffffff", 1, 7, angleToRadians(30), 0.4]}
-        intensity={3}
+        position={[15, 80, 35]}
+        scale={[500, 500, 500]}
+        args={["#ffffff", 7, Math.PI / 4, 0.4]}
+        intensity={15}
+        distance={100}
         castShadow
       />
 
       <mesh castShadow>
         <Player />
+      </mesh>
+
+      <mesh position={[0, 3, 0]} castShadow ref={ballRef}>
         <sphereGeometry attach="geometry" args={[0.3, 32, 32]} />
         <meshStandardMaterial attach="material" color="red" />
       </mesh>
+
       <mesh>
         <PlayGround />
       </mesh>
