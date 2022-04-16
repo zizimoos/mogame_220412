@@ -113,7 +113,7 @@ function Player(props) {
       {/* <Html distanceFactor={10}>
         <NameTag> {`Archer`} </NameTag>
       </Html> */}
-      <axesHelper args={[2]} />
+      {/* <axesHelper args={[2]} /> */}
     </group>
   );
 }
