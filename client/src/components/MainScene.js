@@ -133,8 +133,10 @@ function MainScene(props) {
           position={[15, 80, 35]}
           scale={[500, 500, 500]}
           args={["#ffffff", 7, Math.PI / 4, 0.4]}
+          color="#ffffff"
           intensity={10}
           distance={100}
+          penumbra={0.5}
           castShadow
         />
       </group>
